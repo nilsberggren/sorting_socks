@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Look for socks</title>
+    </head>
+    <body>
+
+        <input autocomplete="off" autofocus placeholder="Search" type="text">
+
+        <ul></ul>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+    
+            let input = document.querySelector('input');
+            input.onkeyup = function() {
+                $.get('/search?q=' + input.value, function(data) {
+                    let html = '';
+                    for (sock of data) {
+                        html += '<li>' + sock + '</li>';
+                    }
+                    document.querySelector('ul').innerHTML = html;
+                });
+            };
+
+        </script>
+
+    </body>
+</html>
